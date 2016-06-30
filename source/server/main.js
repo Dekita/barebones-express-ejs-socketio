@@ -16,9 +16,9 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
 /**
- * Set port we will listen on
+ * Load configuration
  */
-var port = process.env.PORT || 5000;
+var config = require('./config');
 
 /**
  * Set view engine
@@ -61,6 +61,7 @@ io.sockets.on('connection', function(socket) {
 /**
  * Make server listen to port
  */
-server.listen(port, function() {
-  console.log("App is running on localhost port:", port);
+server.listen(config.port, config.site, function() {
+  var address = config.site+':'+config.port;
+  console.log("App is running @:", address);
 });
